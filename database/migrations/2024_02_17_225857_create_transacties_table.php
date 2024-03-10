@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('oefentoets_id');
-            $table->string('user_id');
+            $table->foreignId('oefentoets_id');
+            $table->foreignId('user_id');
             $table->timestamps();
         });
     }

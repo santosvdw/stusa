@@ -7,6 +7,7 @@
     <title>404</title>
 </head>
 <body>
-    404 niet gevonden
+    @include('partials._navigatie', ['vakken' => $vakken])
+    404 niet
 </body>
 </html>

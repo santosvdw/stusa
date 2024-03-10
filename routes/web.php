@@ -1,15 +1,12 @@
 <?php
 
+use App\Models\Course;
 use App\Models\School;
-use App\Models\Scholen;
 use App\Models\Oefentoets;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\DocentController;
-use App\Http\Controllers\LeerlingController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\OefentoetsController;
-use App\Models\Course;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,42 +19,63 @@ use App\Models\Course;
 |
 */
 
+// -------------
+// Home
+// -------------
+
 Route::get('/', function () {
     return view('index', [
-        'title' => 'Home',
+        'titel' => 'Home | STUSA',
         'vakken' => Course::all()
     ]);
 });
 
-
+// -------------
+// AUTH
+// -------------
 Route::get('/login', function () {
     return view('auth.login');
 });
+Route::post('/uitloggen', [UserController::class, 'logout']);
 
-Route::get('/zoeken', function () {
-    return view('zoeken');
-});
+// Registreren 
+Route::get('/registreren/leerling', [UserController::class, 'create_student']);
+Route::get('/registreren/docent', [UserController::class, 'create_teacher']);
+Route::post('/registreren', [UserController::class, 'store']);
 
-Route::get('/register/leerling', [LeerlingController::class, 'create']);
-Route::post('/register/leerling', [LeerlingController::class, 'store']);
+Auth::routes();
 
-// Registreren docenten
-Route::get('/register/docent', [DocentController::class, 'create']);
-Route::post('/register/docent', [DocentController::class, 'store']);
+
+
+// -------------
 // Oefentoetsen
-Route::get('/oefentoetsen', [OefentoetsController::class, 'index']);
-
-Route::post('/oefentoets', [OefentoetsController::class, 'store']);
-Route::get('/oefentoets/uploaden', [OefentoetsController::class, 'create']);
-
+// -------------
+Route::get('/oefentoetsen', [OefentoetsController::class, 'index'])->name('oefentoets.index');
 Route::get('/oefentoets/{id}', [OefentoetsController::class, 'show'])->name('oefentoets.show');
+
+// Oefentoets uploaden
+Route::post('/oefentoets', [OefentoetsController::class, 'store']);
+Route::get('/uploaden', [OefentoetsController::class, 'create'])->name('oefentoets.create');
+
+// Oefentoets zoeken
 Route::get('/zoeken', [OefentoetsController::class, 'search'])->name('oefentoets.search');
 
-// Route::get('/oefentoets/{id}', Oefentoets::class(), 'show');
+// Oefentoets editen
+Route::get('/oefentoets/{id}/bewerken', [OefentoetsController::class, 'edit'])->name('oefentoets.edit');
 
-// Auth::routes();
+// Oefentoets updaten
+Route::put('/oefentoets/{id}', [OefentoetsController::class, 'update'])->name('oefentoets.update');
 
-// Route::get('/template', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Oefentoets verwijderen
+Route::delete('/oefentoets/{id}', [OefentoetsController::class, 'destroy'])->name('oefentoets.destroy');
 
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// -------------
+// USERS
+// -------------
+
+Route::get('/settings', [UserController::class, 'edit'])->name('user.edit');
+Route::get('/{username}', [UserController::class, 'show_profile'])->name('user.show_profile');
+Route::put('/{username}', [UserController::class, 'update'])->name('user.update');
+Route::delete('/{username}', [UserController::class, 'destroy'])->name('user.destroy');

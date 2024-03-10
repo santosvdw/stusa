@@ -11,15 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('teachers', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('username')->unique();
+            $table->boolean('student')->default(true); // true = student, false = docent
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('wachtwoord');
+            $table->string('password');
             $table->string('voornaam');
             $table->string('achternaam');
-            $table->string('school_id');
+            $table->foreignId('school_id');
+            $table->string('jaarlaag')->nullable();
+            $table->string('niveau')->nullable();
+            $table->string('klas')->nullable();
+            $table->string('profiel')->nullable();
+            $table->string('profielfoto')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('teachers');
+        Schema::dropIfExists('users');
     }
 };

@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('practice_exams', function (Blueprint $table) {
             $table->id();
-            $table->string('vak_id');
-            $table->string('onderwerp');
+            $table->foreignId('vak_id');
             $table->string('titel');
-            $table->string('gebruiker_id');
+            $table->foreignId('user_id');
             $table->string('jaarlaag');
-            $table->string('school_id');
+            $table->foreignId('school_id');
             $table->string('niveau');
             $table->boolean('examenstof');
             $table->longText('beschrijving');

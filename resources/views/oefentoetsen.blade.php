@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Oefentoetsen</title>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('content')
     <h1>Oefentoetsen</h1>
     @if(session()->has('success'))
         <p>
@@ -15,11 +9,16 @@
     @endif
 
     <a href="/oefentoets/uploaden">Uploaden</a>
+
+    
+    @if (count($oefentoetsen) == 0) 
+        <h3>
+            Er zijn geen oefentoetsen
+        </h3>
+    @endif
+    
     
     @foreach ($oefentoetsen as $oefentoets)
-        <h2>{{$oefentoets->titel}}</h2>
-        <p>{{$oefentoets->onderwerp}}</p>
-        <a href="/oefentoets/{{$oefentoets->id}}">Bekijk</a>        
+        @include('partials._oefentoets', ['oefentoets' => $oefentoets, 'vakken' => $vakken])        
     @endforeach
-</body>
-</html>
+@endsection

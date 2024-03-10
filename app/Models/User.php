@@ -18,9 +18,17 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'username',
+        'voornaam',
+        'achternaam',
         'email',
+        'school_id',
         'password',
+        'jaarlaag',
+        'niveau',
+        'klas',
+        'profiel',
+        'profielfoto',
     ];
 
     /**
@@ -42,4 +50,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function school()
+    {
+        return $this->belongsTo(School::class);
+    }
+
+    public function oefentoetsen()
+    {
+        return $this->hasMany(PracticeExam::class);
+    }
 }

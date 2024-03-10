@@ -7,9 +7,10 @@
     <title>Resultaten</title>
 </head>
 <body>
+    @include('partials._navigatie', ['vakken' => $vakken])
     <h1>Zoekresultaten</h1>
     @foreach ($oefentoetsen as $oefentoets)
-        @include('partials._oefentoets', ['oefentoets' => $oefentoets])
+        @include('partials._oefentoets', ['oefentoets' => $oefentoets, 'vakken' => $vakken])
     @endforeach
 </body>
 </html>

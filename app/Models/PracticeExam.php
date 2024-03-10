@@ -10,7 +10,7 @@ class PracticeExam extends Model
     use HasFactory;
 
     protected $fillable = [
-        'vak_id', 'onderwerp', 'titel', 'gebruiker_id', 'jaarlaag', 'school_id', 'niveau', 'examenstof', 'beschrijving', 'opgaven', 'bijlage', 'antwoorden', 'normering', 'lesstof'
+        'vak_id', 'beschrijving', 'titel', 'user_id', 'jaarlaag', 'school_id', 'niveau', 'examenstof', 'opgaven', 'bijlage', 'antwoorden', 'normering', 'lesstof'
     ];
 
     public function scopeFilter($query, $filters)
@@ -21,8 +21,18 @@ class PracticeExam extends Model
         }
         if ($filters['search'] ?? false) {
             $query
-                ->Where('titel', 'like', '%' . $filters['search'] . '%')
-                ->orWhere('onderwerp', 'like', '%' . $filters['search'] . '%');
+                ->Where('titel', 'like', '%' . $filters['search'] . '%');
+            // ->orWhere('onderwerp', 'like', '%' . $filters['search'] . '%');
         }
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function school()
+    {
+        return $this->belongsTo(School::class, 'school_id');
     }
 }

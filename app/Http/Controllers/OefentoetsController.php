@@ -13,7 +13,7 @@ class OefentoetsController extends Controller
     public function index()
     {
         return view('oefentoetsen', [
-            'title' => 'Oefentoetsen',
+            'titel' => 'Oefentoetsen | STUSA',
             'oefentoetsen' => PracticeExam::latest()->get(),
             'vakken' => Course::all(),
         ]);
@@ -24,7 +24,7 @@ class OefentoetsController extends Controller
     {
         // dd(request('search'));
         return view('resultaten', [
-            'title' => 'Oefentoetsen',
+            'titel' => 'Zoekresultaten | STUSA',
             'oefentoetsen' => PracticeExam::latest()->filter(request(['search', 'course']))->get(),
             'vakken' => Course::all(),
             // 'oefentoetsen' => PracticeExam::Filter(request(['search']))->get()
@@ -55,15 +55,18 @@ class OefentoetsController extends Controller
         }
 
         // redirect to 404
-        return view('404');
+        return view('404', [
+            'vakken' => Course::all(),
+            'titel' => '404 PAGINA NIET GEVONDEN | STUSA'
+        ]);
     }
 
     // Create a new oefentoets
     public function create()
     {
         return view('oefentoetsen.upload', [
-            'title' => 'Oefentoets uploaden',
             'vakken' => Course::all(),
+            'titel' => 'Oefentoets uploaden | STUSA',
         ]);
     }
 
@@ -73,11 +76,10 @@ class OefentoetsController extends Controller
 
         $data = [
             'vak_id' => implode($request->all('vak_id')),
-            'onderwerp' => implode($request->all('onderwerp')),
+            // 'onderwerp' => implode($request->all('onderwerp')),
             'titel' => implode($request->all('titel')),
-            'gebruiker_id' => implode($request->all('gebruiker_id')),
             'jaarlaag' => implode($request->all('jaarlaag')),
-            'gebruiker_id' => implode($request->all('gebruiker_id')),
+            'user_id' => implode($request->all('user_id')),
             'school_id' => implode($request->all('school_id')),
             'niveau' => implode($request->all('niveau')),
             'examenstof' => $request->input('examenstof') ? true : false, // 'examenstof' => 'required
@@ -99,7 +101,7 @@ class OefentoetsController extends Controller
         $oefentoets->vak_id = $data['vak_id'];
         $oefentoets->onderwerp = $data['onderwerp'];
         $oefentoets->titel = $data['titel'];
-        $oefentoets->gebruiker_id = $data['gebruiker_id'];
+        $oefentoets->user_id = $data['user_id'];
         $oefentoets->jaarlaag = $data['jaarlaag'];
         $oefentoets->school_id = $data['school_id'];
         $oefentoets->niveau = $data['niveau'];
@@ -124,5 +126,54 @@ class OefentoetsController extends Controller
         // 'examenstof' => implode($request->all('examenstof')),
 
         return redirect()->route('oefentoets.show', $id);
+    }
+
+    // Edit a oefentoets
+    public function edit($id)
+    {
+        $oefentoets = PracticeExam::find($id);
+
+        if ($oefentoets) {
+            return view('oefentoetsen.edit', [
+                'oefentoets' => $oefentoets,
+                'vakken' => Course::all(),
+                'titel' => 'Bewerken | STUSA',
+            ]);
+        }
+
+        // redirect to 404
+        // return view('404', ['vakken' => Course::all()]);
+    }
+
+    // Update a oefentoets
+    public function update(Request $request, $id)
+    {
+        $oefentoets = PracticeExam::find($id);
+
+        if ($oefentoets) {
+            $oefentoets->update($request->all());
+            return redirect()->route('oefentoets.show', $id);
+        }
+
+        // redirect 
+        OefentoetsController::show($id);
+    }
+
+    // Delete a oefentoets
+    public function destroy($id)
+    {
+        $oefentoets = PracticeExam::find($id);
+
+        if ($oefentoets) {
+            $oefentoets->delete();
+            return view('/', [
+                'title' => 'Home',
+                'vakken' => Course::all(),
+                'titel' => 'Home | STUSA',
+            ]);
+        }
+
+        // redirect to 404
+        return view('404', ['vakken' => Course::all(), 'titel' => '404 PAGINA NIET GEVONDEN | STUSA']);
     }
 }
