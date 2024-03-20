@@ -1,24 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Oefentoetsen</h1>
-    @if(session()->has('success'))
-        <p>
-            {{ session()->get('success') }}
-        </p>
-    @endif
+<main>
+    <div class="wrapper">        
+        <header>
+            <h1>Oefentoetsen</h1>
+        </header>
 
-    <a href="/oefentoets/uploaden">Uploaden</a>
-
-    
-    @if (count($oefentoetsen) == 0) 
-        <h3>
-            Er zijn geen oefentoetsen
+        <div class="blocks">
+            <a class="block small" href="/oefentoets/uploaden">Uploaden</a>
+        </div>
+        
+        @if (count($oefentoetsen) == 0) 
+        <h3 class="no_exams_message">
+            Er zijn geen oefentoetsen, upload er zelf een!
         </h3>
-    @endif
-    
-    
-    @foreach ($oefentoetsen as $oefentoets)
-        @include('partials._oefentoets', ['oefentoets' => $oefentoets, 'vakken' => $vakken])        
-    @endforeach
+        @endif
+        
+        <div class="oefentoets_list">
+            @foreach ($oefentoetsen as $oefentoets)
+            @include('partials._oefentoets_list', ['oefentoets' => $oefentoets, 'vakken' => $vakken, 'gebruikers' => $gebruikers])
+            @endforeach  
+        </div>
+    </div>
+</main>
 @endsection

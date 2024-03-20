@@ -1,7 +1,31 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<main>
+    <div class="wrapper">
+        <header>
+            <h1>Welkom, {{Auth::user()->voornaam}}</h1>
+            <h3>Wat wil je doen vandaag?</h3>
+        </header>
+        <section class="dashboard">
+            <div class="blocks">
+                <a class="block" href="/oefentoetsen">
+                    <i class="bi bi-box-arrow-up-right"></i>
+                    <p>Oefentoetsen bekijken</p>
+                </a>
+                <a class="block" href="/uploaden">
+                    <i class="bi bi-upload"></i>
+                    <p>Oefentoets uploaden</p>
+                </a>
+                <a class="block" href="/zoeken">
+                    <i class="bi bi-search"></i>
+                    <p>Zoeken</p>
+                </a>
+            </div>
+        </section>
+    </div>
+</main>
+{{-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -19,5 +43,5 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 @endsection

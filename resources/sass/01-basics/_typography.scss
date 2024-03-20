@@ -1,0 +1,9 @@
+@use './variables' as *;
+
+html {
+    font-family: 'DM Sans', 'Helvetica', sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6, p, li, input, select {
+    color: $black
+}

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Course;
 use App\Models\PracticeExam;
 use Illuminate\Http\Request;
@@ -16,6 +17,7 @@ class OefentoetsController extends Controller
             'titel' => 'Oefentoetsen | STUSA',
             'oefentoetsen' => PracticeExam::latest()->get(),
             'vakken' => Course::all(),
+            'gebruikers' => User::all(),
         ]);
     }
 
@@ -27,6 +29,7 @@ class OefentoetsController extends Controller
             'titel' => 'Zoekresultaten | STUSA',
             'oefentoetsen' => PracticeExam::latest()->filter(request(['search', 'course']))->get(),
             'vakken' => Course::all(),
+            'gebruikers' => User::all(),
             // 'oefentoetsen' => PracticeExam::Filter(request(['search']))->get()
         ]);
     }
@@ -35,6 +38,8 @@ class OefentoetsController extends Controller
     public function show($id)
     {
         $oefentoets = PracticeExam::find($id);
+
+        $author = User::find($oefentoets->user_id);
 
         if ($oefentoets) {
             return view('oefentoets', [
@@ -49,6 +54,7 @@ class OefentoetsController extends Controller
                 'antwoorden' => $oefentoets->antwoorden,
                 'normering' => $oefentoets->normering,
                 'lesstof' => $oefentoets->lesstof,
+                'auteur' => $author,
                 'examenstof' => $oefentoets->examenstof ? 'Ja' : 'Nee',
                 'vakken' => Course::all(),
             ]);
@@ -99,7 +105,6 @@ class OefentoetsController extends Controller
 
         $oefentoets = new PracticeExam();
         $oefentoets->vak_id = $data['vak_id'];
-        $oefentoets->onderwerp = $data['onderwerp'];
         $oefentoets->titel = $data['titel'];
         $oefentoets->user_id = $data['user_id'];
         $oefentoets->jaarlaag = $data['jaarlaag'];
@@ -138,6 +143,10 @@ class OefentoetsController extends Controller
                 'oefentoets' => $oefentoets,
                 'vakken' => Course::all(),
                 'titel' => 'Bewerken | STUSA',
+                'auteur' => User::find($oefentoets->user_id),
+                'niveaus' => ['VMBO', 'HAVO', 'VWO'],
+                'jaarlagen' => ['1', '2', '3', '4', '5', '6'],
+
             ]);
         }
 
@@ -151,6 +160,7 @@ class OefentoetsController extends Controller
         $oefentoets = PracticeExam::find($id);
 
         if ($oefentoets) {
+            $request['examenstof'] = $request->input('examenstof') ? 1 : 0;
             $oefentoets->update($request->all());
             return redirect()->route('oefentoets.show', $id);
         }

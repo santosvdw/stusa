@@ -1,0 +1,59 @@
+@use '../01-basics/variables' as *;
+
+.blocks {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    width: 70%;
+
+}
+
+a {
+    
+    &.block {
+        width: 150px;
+        height: 150px;
+        background-color: $clr-primary;
+        display: flex;
+        justify-content: center;
+        flex-flow: column nowrap;
+        gap: 3px;
+        align-items: center;
+        color: $white;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: 0.3s;
+
+        &:hover {
+            background-color: $clr-secondary;
+        }
+
+        p{
+            text-align: center;
+            color: $white;
+        }
+
+        i {
+            font-size: 1.4rem;
+        }
+
+        * {
+            width: min-content;
+        }
+
+        &.login {
+            flex-flow: row nowrap;
+            i {
+                padding-right: 2.5px;
+            }
+        }
+
+        &.small {
+            height: fit-content;
+            padding: 10px 0;
+        }
+    }
+}

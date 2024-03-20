@@ -1,0 +1,45 @@
+// COLORS
+$clr-primary: #6D11F7;
+$clr-secondary: #4B0082;
+$black: #231F20;
+$white: #FFF;
+$bg-color: #EDEFF4;
+
+// TYPOGRAPHY
+$font-family: 'DM Sans', 'Helvetica', sans-serif;
+
+// SPACE
+/* One-up pairs */
+/* Space 3xs-2xs: 4px → 11px */
+$space-3xs-2xs: clamp(0.25rem, calc(0.13rem + 0.63vw), 0.69rem);
+
+/* Space 2xs-xs: 8px → 16px */
+$space-2xs-xs: clamp(0.50rem, calc(0.36rem + 0.71vw), 1.00rem);
+
+/* Space xs-s: 12px → 21px */
+$space-xs-s: clamp(0.75rem, calc(0.59rem + 0.80vw), 1.31rem);
+
+/* Space s-m: 16px → 32px */
+$space-s-m: clamp(1.00rem, calc(0.71rem + 1.43vw), 2.00rem);
+
+/* Space m-l: 24px → 42px */
+$space-m-l: clamp(1.50rem, calc(1.18rem + 1.61vw), 2.63rem);
+
+/* Space l-xl: 32px → 63px */
+$space-l-xl: clamp(2.00rem, calc(1.45rem + 2.77vw), 3.94rem);
+
+/* Space xl-2xl: 48px → 84px */
+$space-xl-2xl: clamp(3.00rem, calc(2.36rem + 3.21vw), 5.25rem);
+
+/* Space 2xl-3xl: 64px → 126px */
+$space-2xl-3xl: clamp(4.00rem, calc(2.89rem + 5.54vw), 7.88rem);
+
+// TYPE
+$step--2: clamp(0.61rem, calc(0.56rem + 0.23vw), 0.84rem);
+$step--1: clamp(0.73rem, calc(0.67rem + 0.32vw), 1.05rem);
+$step-0: clamp(0.88rem, calc(0.79rem + 0.44vw), 1.31rem);
+$step-1: clamp(1.05rem, calc(0.93rem + 0.59vw), 1.64rem);
+$step-2: clamp(1.26rem, calc(1.10rem + 0.79vw), 2.05rem);
+$step-3: clamp(1.51rem, calc(1.30rem + 1.05vw), 2.56rem);
+$step-4: clamp(1.81rem, calc(1.54rem + 1.39vw), 3.20rem);
+$step-5: clamp(2.18rem, calc(1.81rem + 1.83vw), 4.01rem);

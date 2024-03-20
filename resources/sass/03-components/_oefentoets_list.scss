@@ -1,0 +1,39 @@
+@use '../01-basics/variables' as *;
+
+div.list_card {
+    background-color: $white;
+    display: flex;
+    flex-direction: column wrap;
+    width: 70%;
+    margin: 0 auto;
+    padding: 8px;
+    border-radius: 15px;
+    align-items: center;
+    justify-content: space-between;
+
+    .list_card_{
+        &image {
+            width: fit-content;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        &info {
+            width: 75%;
+            display: flex;
+            justify-content: start;
+            flex-flow: column wrap;
+
+            h2 {
+                margin-bottom: 3px;
+            }
+        }
+        &link {
+            width: 10%;
+
+            .icon-button {
+                font-size: 2.5rem;
+            }
+        }
+    }
+}

@@ -1,0 +1,83 @@
+@use '../01-basics/variables' as *;
+
+form {
+    font-family: $font-family;
+
+    .form-input {
+        display: flex;
+        flex-flow: column nowrap;
+        margin-bottom: 10px;
+
+        input {
+            max-width: 350px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: $white;
+        }
+        
+        
+
+        select {
+            width: 250px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        textarea {
+            width: 350px;
+            height: 150px;
+            padding: 10px;
+            border-radius: 5px;
+
+            &::placeholder {
+                font-family: $font-family;
+            }
+        }
+
+        select, input, textarea {
+            border: 2px solid $clr-secondary;
+            transition: 0.3s;
+
+            &:focus, &:hover{
+                border: 2px solid $clr-primary;
+            }
+        }
+
+
+        &.checkbox {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            gap: 10px;
+        }
+    }
+}
+
+.submit-btn {
+    background-color: $clr-primary;
+    color: $white;
+    width: fit-content;
+    border: none;
+    padding: 12px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+    font-weight: 600;
+
+    &.red {
+        background-color: #e2002d;
+
+        &:hover {
+            background-color: #860014;
+        }
+
+        &.nav {
+            padding: 8px 6px;
+        }
+    }
+
+    &:hover {
+        background-color: $clr-secondary;
+    }
+}

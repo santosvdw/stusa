@@ -8,6 +8,6 @@
 </head>
 <body>
     @include('partials._navigatie', ['vakken' => $vakken])
-    404 niet
+    <header><h1>404 niet gevonden.</h1></header>
 </body>
 </html>

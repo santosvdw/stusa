@@ -1,7 +1,4 @@
-@use 'variables' as *;
-
-body {
-    background-color: #FFFFFF;
-    color: $color;
-}
+@use '01-basics/basics' as *;
+@use '03-components/components' as *;
+@use '04-layouts/layouts' as *;
 

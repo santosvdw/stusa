@@ -17,12 +17,14 @@ class UserController extends Controller
         $user = User::where('username', $username)->first();
         $oefentoetsen = PracticeExam::where('user_id', $user->id)->get();
 
+        $rol = $user->student ? $user->niveau . ' ' . $user->jaarlaag : 'Docent';
         if ($user) {
             return view('profile', [
                 'user' => $user,
                 'titel' => $user->username . ' | STUSA',
                 'vakken' => Course::all(),
                 'oefentoetsen' => $oefentoetsen,
+                'rol' => $rol,
             ]);
         }
 
@@ -95,10 +97,7 @@ class UserController extends Controller
         // Login
         auth()->login($gebruiker);
 
-        return redirect('/', [
-            'vakken' => Course::all(),
-            'titel' => 'Home | STUSA',
-        ]);
+        return redirect()->route('home');
     }
 
     public function logout(Request $request)

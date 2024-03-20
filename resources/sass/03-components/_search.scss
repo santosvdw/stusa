@@ -1,0 +1,66 @@
+@use '../01-basics/basics' as *;
+
+form.zoeken {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    position: absolute;
+    width: fit-content;
+    border-radius: 5px;
+    select {
+        width:min-content;
+        padding: 10px;
+        border: 2px solid grey;
+        border-radius: 25px;
+        background-color: $bg-color;
+    }
+    
+    input {
+        width: 300px;
+        padding: 10px;
+        border: 2px solid grey;
+        border-radius: 25px;
+        background-color: $bg-color;
+
+        &:active, &:focus, &::selection{
+            border: 2px solid $clr-primary;
+        }
+    }
+
+    input,select {
+        transition: 0.3s;
+
+        &:focus, &:hover{
+            border: 2px solid $clr-primary;
+        }
+    }
+
+    button {
+        background-color: $clr-primary;
+        color:$white;
+        width: 40px;
+        height: 40px;
+        border: none;
+        border-color: none;
+        padding: 12px 8px;
+        border-radius: 100%;
+        cursor: pointer;
+        transition: 0.3s;
+        font-weight: 600;
+
+        &.red {
+            background-color: $clr-secondary;
+
+            &:hover {
+                background-color: #860014;
+            }
+        } 
+
+        &:hover {
+            background-color: $clr-secondary;
+        }
+    }
+    
+}

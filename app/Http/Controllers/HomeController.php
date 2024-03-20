@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Course;
+use App\Models\School;
+use App\Models\PracticeExam;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +27,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('home', [
+            'titel' => 'Home | STUSA',
+            'scholen' => School::all(),
+            'niveaus' => ['VMBO', 'HAVO', 'VWO'],
+            'vakken' => Course::all(),
+            'titel' => 'Zoekresultaten | STUSA',
+            'oefentoetsen' => PracticeExam::latest()->filter(request(['search', 'course']))->get(),
+            'gebruikers' => User::all(),
+
+        ]);
     }
 }

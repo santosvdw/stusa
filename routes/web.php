@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Models\Course;
 use App\Models\School;
 use App\Models\Oefentoets;
@@ -23,28 +24,32 @@ use App\Http\Controllers\OefentoetsController;
 // Home
 // -------------
 
-Route::get('/', function () {
-    return view('index', [
-        'titel' => 'Home | STUSA',
-        'vakken' => Course::all()
-    ]);
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
 
 // -------------
 // AUTH
 // -------------
+Auth::routes();
+
 Route::get('/login', function () {
-    return view('auth.login');
+    return view('auth.login', [
+        'titel' => 'Inloggen | STUSA',
+    ]);
 });
+
 Route::post('/uitloggen', [UserController::class, 'logout']);
 
 // Registreren 
-Route::get('/registreren/leerling', [UserController::class, 'create_student']);
+Route::get('/registreren/leerling', [UserController::class, 'create_student'])->name('registreren');
 Route::get('/registreren/docent', [UserController::class, 'create_teacher']);
 Route::post('/registreren', [UserController::class, 'store']);
 
-Auth::routes();
-
+Route::get('/welkom', function () {
+    return view('welkom', [
+        'titel' => 'Welkom | STUSA',
+    ]);
+})->name('welkom');
 
 
 // -------------
