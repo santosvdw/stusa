@@ -1,4 +1,5 @@
-# Stusa
+![STUSA](public/assets/logo.png)
+### STUSA - van Santos van der Wansem 
 
 Oefentoetsen maken is voor vele leerlingen dé manier om te leren voor een toets. Zulke oefentoetsen worden gemaakt door leerlingen en docenten en dat proces neemt veel tijd in beslag. Die tijd kan bespaard worden door een platform te creëren waarbij leerlingen en docenten onderling hun oefentoetsen kunnen uitwisselen. Ons project zal als dat platform dienen om het leerlingen zo makkelijk mogelijk te maken om informatie met elkaar uit te wisselen.
 
